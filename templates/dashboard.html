@@ -1,0 +1,103 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ url_for('dashboard') }}">P@rk</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul>
+        </div> -->
+        <!-- <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"> -->
+        <div class="col-xs-12 col-sm-12 col-md-12 main">
+          <h1 class="page-header">P@rk will save your life, {{ name }}</h1>
+          <h1 align="center">Current Credit: {{ credit }}</h1>
+          <div class="row placeholders">
+            <div class="col-xs-12 col-sm-6 placeholder">
+              <a href="{{ url_for('report_a_park') }}" class="btn btn-success" style="white-space:normal !important; word-wrap: break-word; word-break: normal; padding: 10px 20px; font-size: 40px; border-radius: 40px; width:100%;">
+                Report A P@rking
+              </a>
+              <h4>To GET P@rk Credit</h4>
+            </div>
+            <div class="col-xs-12 col-sm-6 placeholder">
+              <a href="{{ url_for('find_a_park') }}" class="btn btn-primary" style="white-space:normal !important; word-wrap: break-word; word-break: normal; padding: 10px 20px; font-size: 40px; border-radius: 40px; width:100%;">
+                Find A P@rking
+              </a>
+              <h4>To USE P@rk Credit</h4>
+            </div>
+          </div>
+
+          <h2 class="sub-header">History with P@rk</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th> #ID     </th>
+                  <th> Time    </th>
+                  <th> Credit  </th>
+                  <th> Type    </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for history in historys %}
+                  <tr id={{ history.id }}>
+                    <th scope="row">{{ history.user_name }}</th>
+                    <td>            {{ history.time }}     </td>
+                    <td>            {{ history.credit }}   </td>
+                    <td>            {{ history.type }}     </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+CREATE TABLE users (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    emailadr VARCHAR(50) NOT NULL UNIQUE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users ( username, password, emailadr )
+   VALUES
+   ( "zilinwang", "zilinwang", "zw2423@columbia.edu" );
+
+SELECT * FROM users;
+
+CREATE TABLE historys (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    credit INT NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    user_name VARCHAR(50) NOT NULL
+);
+
+INSERT INTO historys ( credit, type, status, user_name )
+   VALUES
+   ( "+1000", "admin test", "Done", "LickMyTotem" );
+
+INSERT INTO historys ( location, credit, type, status, user_name )
+  VALUES
+  ( "40.795866,-73.974219", "-5", "find", "Done", "yucanliu" );
+
+CREATE TABLE parking (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    location VARCHAR(255) NOT NULL UNIQUE,
+    type VARCHAR(20) NOT NULL,
+    available VARCHAR(20) NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+UPDATE parking SET available="yes" WHERE 1=1;
+
+UPDATE parking SET status="Planned" WHERE status="Planned\n";
+
+ALTER TABLE users
+ADD COLUMN result TEXT AFTER emailadr;

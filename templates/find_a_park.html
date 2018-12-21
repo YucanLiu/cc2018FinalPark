@@ -1,0 +1,67 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+<link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ url_for('dashboard') }}">P@rk</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 main">
+          <h1 class="page-header">{{ name }} is finding a P@rking</h1>
+
+          <div class="container">
+
+            <form class="form-signin" method="POST" action="/find_a_park">
+              <h2 class="form-signin-heading">Find a P@rking</h2>
+              <p style="color:red"> {{ notice }} </p>
+              {{ form.hidden_tag() }}
+              {{ wtf.form_field(form.location) }}
+              {{ wtf.form_field(form.miles) }}
+              {{ wtf.form_field(form.type) }}
+              <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="$('#loading1').show();$('#loading2').show();"> Find Me a P@rk</button>
+              <div id="loading1" style="display:none; text-align:center; margin-top:20px;"><img src="{{ url_for('static', filename='spinner.gif') }}" alt="" />Loading! </div>
+              <p id="loading2" style="display:none; text-align:center; color:red">Your might want to search within smaller range...</p>
+            </form>
+
+
+          </div> <!-- /container -->
+
+        </div>
+      </div>
+
+
+    </div>
+{% endblock %}
